@@ -69,5 +69,3 @@ function sendData_GAS(date, weight) {
         }
     });
 }
-
-// thx! > https://www.koreyome.com/web/make-spreadsheet-to-json-at-google-apps-script/
