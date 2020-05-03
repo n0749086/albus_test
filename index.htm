@@ -17,7 +17,7 @@
             </tr>
             <tr><td>体重</td><td>><input type="number" name="weight" step="0.1" required /></td>
             </tr>
-            <tr><td><input type="submit"></td></tr>
+            <tr><td><input type="submit"></td><td id="status"></td></tr>
         </table>
     </form>
 </div>
@@ -42,6 +42,7 @@
         var valDate = $('#my-form [name=date]').val();
         var valWeight = $('#my-form [name=weight]').val();
         sendData_GAS(valDate, valWeight);
+        $("#status").text("送信しました");
         return false;                       // 遷移無効化
     });
 </script>
