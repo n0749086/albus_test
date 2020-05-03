@@ -35,8 +35,32 @@ function format_label(date) {
 	return format_str;
 }
 
+function insertionSort(l_lab, l_wei, in_lab, in_weight){
+	var result = new Object();
+	result.lab = new Array(0);
+	result.wei = new Array(0);
+	var idx;
 
-// 【main-script】 スプレッドシート内の記述をjsonデータとして読み込み html 内へ入れ込む
+	for (idx = 0; idx < l_lab.length; idx++) {
+		if(in_lab < l_lab[idx]) {
+			break;
+		} else {
+			result.lab.push(l_lab[idx]);
+			result.wei.push(l_wei[idx]);
+		}
+	}
+
+	result.lab.push(in_lab);
+	result.wei.push(in_weight);
+
+	for (let idx2 = idx; idx2 < l_lab.length; idx2++) {
+		result.lab.push(l_lab[idx2]);
+		result.wei.push(l_wei[idx2]);
+	}
+
+	return result;
+}
+
 function getJsonp_GAS() {
 	$.ajax({
 		type: 'GET',
@@ -44,13 +68,17 @@ function getJsonp_GAS() {
 		dataType: 'jsonp',
 		jsonpCallback: 'jsondata',
 		success: function(json){
-            var len = json.length;
-            var label = [];
-            var weight = [];
-			for(var i=0; i < len; i++){
-                label.push(format_label(new Date(json[i].date)));
-                weight.push(json[i].weight);
-            }
+			var label = new Array(0);
+			var weight = new Array(0);
+
+			for(let i=0; i < json.length; i++){
+				result = insertionSort(label, weight, new Date(json[i].date), json[i].weight);
+				label = result.lab;	weight = result.wei;
+			}
+
+			for(let i=0; i < label.length; i++) {
+				label[i] = format_label(label[i]);
+			}
             drawBarChart(label, weight);
 		}
 	});
