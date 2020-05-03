@@ -28,6 +28,7 @@ function drawBarChart(labels, data) {
     });
 }
 
+// 出力用にlabelを整形
 function format_label(date) {
 	format_str = "YY/MM/DD";
 	format_str = format_str.replace(/YY/g, -100 + date.getYear());
@@ -36,6 +37,7 @@ function format_label(date) {
 	return format_str;
 }
 
+// なんちゃって挿入ソート
 function insertionSort(l_lab, l_wei, in_lab, in_weight){
 	var result = new Object();
 	result.lab = new Array(0);
@@ -62,6 +64,7 @@ function insertionSort(l_lab, l_wei, in_lab, in_weight){
 	return result;
 }
 
+// SpreadSheetからデータを受信
 function getJsonp_GAS() {
 	$.ajax({
 		type: 'GET',
@@ -72,11 +75,13 @@ function getJsonp_GAS() {
 			var label = new Array(0);
 			var weight = new Array(0);
 
+			// jsonデータを読み込む
 			for(let i=0; i < json.length; i++){
 				result = insertionSort(label, weight, new Date(json[i].date), json[i].weight);
 				label = result.lab;	weight = result.wei;
 			}
 
+			// 日付を基準にソート
 			for(let i=0; i < label.length; i++) {
 				label[i] = format_label(label[i]);
 			}
@@ -85,8 +90,9 @@ function getJsonp_GAS() {
 	});
 }
 
+// SpreadSheetへデータを送信
 function sendData_GAS(date, weight) {
-    var sendData = "date=" + date + "&weight="+weight;
+	var sendData = "date=" + date + "&weight="+weight;
         
     $.ajax({
         type: "POST",

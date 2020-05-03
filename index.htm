@@ -32,10 +32,12 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 <script>
-    // ページ読み込み後の処理
+    // ページ読み込み後の処理 -> SpreadSheetからデータを読み込み、canvasに描画
     window.onload = function(){
         getJsonp_GAS();
     }
+
+    // 送信ボタンを押した際の挙動 -> SpreadSheetへデータを投稿
     $("form").submit( function(){
         var valDate = $('#my-form [name=date]').val();
         var valWeight = $('#my-form [name=weight]').val();
