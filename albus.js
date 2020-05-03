@@ -28,6 +28,14 @@ function drawBarChart(labels, data) {
     });
 }
 
+function format_label(date) {
+	format_str = "MM/DD";
+	format_str = format_str.replace(/MM/g, 1 + date.getMonth());
+	format_str = format_str.replace(/DD/g, date.getDate());
+	return format_str;
+}
+
+
 // 【main-script】 スプレッドシート内の記述をjsonデータとして読み込み html 内へ入れ込む
 function getJsonp_GAS() {
 	$.ajax({
@@ -40,11 +48,7 @@ function getJsonp_GAS() {
             var label = [];
             var weight = [];
 			for(var i=0; i < len; i++){
-                format_str = "MM/DD";
-                var date = new Date(json[i].date);
-                format_str = format_str.replace(/MM/g, 1 + date.getMonth());
-                format_str = format_str.replace(/DD/g, date.getDate());
-                label.push(format_str);
+                label.push(format_label(new Date(json[i].date)));
                 weight.push(json[i].weight);
             }
             drawBarChart(label, weight);
