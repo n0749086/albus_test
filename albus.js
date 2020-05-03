@@ -29,7 +29,8 @@ function drawBarChart(labels, data) {
 }
 
 function format_label(date) {
-	format_str = "MM/DD";
+	format_str = "YY/MM/DD";
+	format_str = format_str.replace(/YY/g, -100 + date.getYear());
 	format_str = format_str.replace(/MM/g, 1 + date.getMonth());
 	format_str = format_str.replace(/DD/g, date.getDate());
 	return format_str;
