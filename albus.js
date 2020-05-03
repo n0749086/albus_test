@@ -98,9 +98,6 @@ function sendData_GAS(date, weight) {
         type: "POST",
         crossDomain: true,
         url: "https://script.google.com/macros/s/AKfycbxtd8R0qkp6rfByKkMhCOcLbNqv5A5IYuJhx7DzgRe1_mhe3cY/exec",
-        data: sendData,
-        success: function(msg){
-            return false;               // 遷移無効化
-        }
+        data: sendData
     });
 }
