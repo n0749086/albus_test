@@ -52,4 +52,18 @@ function getJsonp_GAS() {
 	});
 }
 
+function sendData_GAS(date, weight) {
+    var sendData = "date=" + date + "&weight="+weight;
+        
+    $.ajax({
+        type: "POST",
+        crossDomain: true,
+        url: "https://script.google.com/macros/s/AKfycbxtd8R0qkp6rfByKkMhCOcLbNqv5A5IYuJhx7DzgRe1_mhe3cY/exec",
+        data: sendData,
+        success: function(msg){
+            return false;               // 遷移無効化
+        }
+    });
+}
+
 // thx! > https://www.koreyome.com/web/make-spreadsheet-to-json-at-google-apps-script/

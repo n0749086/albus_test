@@ -8,21 +8,40 @@
 <input type="button" value="グラフ更新" onclick="getJsonp_GAS()">
 
 <br><br>
+<div style="width:300px; border: 2px solid #000000;">
+    <form id="my-form">
+        データ追加<br>
+        <table>
+            <tr>
+            <td>記入日</td><td>><input type="date" name="date" required /></td>
+            </tr>
+            <tr><td>体重</td><td>><input type="number" name="weight" step="0.1" required /></td>
+            </tr>
+            <tr><td><input type="submit"></td></tr>
+        </table>
+    </form>
+</div>
+<br><br>
 <div>
 データは以下からとってきてます。<br>
 <a href="https://docs.google.com/spreadsheets/d/1PFs35Ww9eFqIlg5v75gelgp_RFTjOxzsJbdM_zkpzq8/edit?usp=sharing">こちら</a><br>
 </div>
 
-<script>
-// ページ読み込み後の処理
-window.onload = function(){
-	// 【main-script】 を実行
-	getJsonp_GAS();
-}
-</script>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
 <script src="./albus.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<script>
+    // ページ読み込み後の処理
+    window.onload = function(){
+        getJsonp_GAS();
+    }
+    $("form").submit( function(){
+        var valDate = $('#my-form [name=date]').val();
+        var valWeight = $('#my-form [name=weight]').val();
+        sendData_GAS(valDate, valWeight);
+        return false;                       // 遷移無効化
+    });
+</script>
 </body>
 </html>
