@@ -1,3 +1,5 @@
+const REQ_URL = 'https://script.google.com/macros/s/AKfycbxtd8R0qkp6rfByKkMhCOcLbNqv5A5IYuJhx7DzgRe1_mhe3cY/exec';
+
 function drawBarChart(labels, data) {
     // 4)chart.jsで描画
     var ctx = document.getElementById("albus_weight").getContext("2d");
@@ -68,7 +70,7 @@ function insertionSort(l_lab, l_wei, in_lab, in_weight){
 function getJsonp_GAS() {
 	$.ajax({
 		type: 'GET',
-		url: 'https://script.google.com/macros/s/AKfycbxtd8R0qkp6rfByKkMhCOcLbNqv5A5IYuJhx7DzgRe1_mhe3cY/exec',
+		url: REQ_URL,
 		dataType: 'jsonp',
 		jsonpCallback: 'jsondata',
 		success: function(json){
@@ -97,7 +99,7 @@ function sendData_GAS(date, weight) {
     $.ajax({
         type: "POST",
         crossDomain: true,
-        url: "https://script.google.com/macros/s/AKfycbxtd8R0qkp6rfByKkMhCOcLbNqv5A5IYuJhx7DzgRe1_mhe3cY/exec",
+        url: REQ_URL,
         data: sendData
     });
 }
